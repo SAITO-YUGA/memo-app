@@ -13,5 +13,4 @@ import DocumentSvg from './svgs/DocumentSvg.vue'
         </div>
     </header>
 </template>
-<style>
-</style>
+
