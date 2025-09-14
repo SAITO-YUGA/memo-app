@@ -3,13 +3,13 @@ import DocumentSvg from './svgs/DocumentSvg.vue'
 </script>
 
 <template>
-    <header class="bg-white flex  justify-center items-center m-8">
-        <div class="flex justify-center items-center space-x-2">
-            <DocumentSvg class="w-8 h-8 " />
-            <h1 class="text-xl font-bold">メモアプリ</h1>
-        </div>
-        <div>
-            <h2 class="text-lg font-light mx-2">~簡単に記録できるメモ~</h2>
+    <header class="bg-white">
+        <div class="max-w-3xl mx-auto px-4 py-3 text-center">
+            <h1 class="flex items-center justify-center gap-2 text-xl font-bold">
+                <DocumentSvg class="w-6 h-6" />
+                簡単メモ
+            </h1>
+            <p class="text-sm text-gray-500 mt-1">思いついたことをさっと記録しよう</p>
         </div>
     </header>
 </template>
