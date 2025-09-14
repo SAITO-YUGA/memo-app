@@ -9,7 +9,33 @@ const content = ref("")
 const handleUpdate = (val) => {
     content.value = val
 }
-const handleSave = () => {
+const handleSave = async () => {
+    try {
+        const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
+
+        const res = await fetch("/api/notes", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+
+                "X-CSRF-TOKEN": csrfToken,
+            },
+            body: JSON.stringify({
+                title: null,
+                content: content.value,
+            }),
+        })
+
+        if (!res.ok) throw new Error("保存に失敗しました")
+
+
+        content.value = ""
+        alert("保存しました")
+    }catch(err){
+        console.error(err)
+        alert("エラーが発生しました")
+
+    }
     console.log("保存しました。",content.value)
 }
 

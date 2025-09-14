@@ -25,5 +25,12 @@ export default defineConfig({
         host: true,
         port: "5173",
         hmr: {host: "localhost"},
+        proxy: {
+            '/api' : {
+                target: 'http://nginx:80',
+                changeOrigin: true,
+                secure: false,
+            }
+        }
     },
 })
