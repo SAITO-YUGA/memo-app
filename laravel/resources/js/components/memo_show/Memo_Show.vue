@@ -7,6 +7,7 @@ const memos = ref([])
 const loading = ref(false)
 const err = ref("")
 
+
 const fmt = (iso) =>
     new Intl.DateTimeFormat("ja-JP", {
         year: "numeric", month: "2-digit", day: "2-digit",
@@ -25,6 +26,16 @@ const fetchMemos = async () => {
         err.value = e.message ?? "不明なエラー"
     } finally {
         loading.value = false
+    }
+}
+
+const handleDelete = async(id) => {
+    memos.value = memos.value.filter(m => m.id !== id)
+    try{
+        const res = await fetch(`/api/notes/${id}`,{method: "DELETE"})
+        if(!res.ok) throw new Error("削除に失敗しました")
+    } catch (e) {
+        alert(e.message || "削除に失敗しました")
     }
 }
 defineExpose({fetchMemos})
@@ -60,6 +71,9 @@ onMounted(fetchMemos)
                 <button
                     type="button"
                     class="absolute right-3 top-3 text-red-600 hover:text-red-700 opacity-0 group-hover:opacity-100 transition"
+                    @click.stop="handleDelete(memo.id)"
+                    aria-label="メモを削除"
+                    title="削除"
                 >
                     <TrashSvg/>
                 </button>
